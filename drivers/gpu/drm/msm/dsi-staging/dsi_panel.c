@@ -656,12 +656,11 @@ static int dsi_panel_update_backlight(struct dsi_panel *panel,
 
 	dsi = &panel->mipi_device;
 
-<<<<<<< HEAD
 	if (panel->bl_config.bl_inverted_dbv)
 		bl_lvl = (((bl_lvl & 0xff) << 8) | (bl_lvl >> 8));
 
 	rc = mipi_dsi_dcs_set_display_brightness(dsi, bl_lvl);
-=======
+
 	if (bl_lvl == 0) {
             rc = dsi_panel_set_dimming_brightness(panel, HBM_OFF_DIMMING_OFF, bl_lvl);
             panel->skip_dimming_on = true;
@@ -677,7 +676,6 @@ static int dsi_panel_update_backlight(struct dsi_panel *panel,
                 rc = dsi_panel_set_brightness(panel, HBM_OFF_DIMMING_ON, bl_lvl);
             }
 	}
->>>>>>> e2ac77efb2ef (Add drivers/gpu/drm/ modifications)
 	if (rc < 0)
 		pr_err("failed to update dcs backlight:%d\n", bl_lvl);
 
@@ -5089,3 +5087,4 @@ error:
 	mutex_unlock(&panel->panel_lock);
 	return rc;
 }
+
