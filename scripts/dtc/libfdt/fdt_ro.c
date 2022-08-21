@@ -243,21 +243,6 @@ const char *fdt_get_name(const void *fdt, int nodeoffset, int *len)
 
 	nameptr = nh->name;
 
-	if (fdt_version(fdt) < 0x10) {
-		/*
-		 * For old FDT versions, match the naming conventions of V16:
-		 * give only the leaf name (after all /). The actual tree
-		 * contents are loosely checked.
-		 */
-		const char *leaf;
-		leaf = strrchr(nameptr, '/');
-		if (leaf == NULL) {
-			err = -FDT_ERR_BADSTRUCTURE;
-			goto fail;
-		}
-		nameptr = leaf+1;
-	}
-
 	if (len)
 		*len = strlen(nameptr);
 
