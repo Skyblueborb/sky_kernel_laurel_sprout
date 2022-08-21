@@ -7235,17 +7235,6 @@ int dsi_display_validate_mode_change(struct dsi_display *display,
 						DSI_MODE_FLAG_DYN_CLK;
 				SDE_EVT32(cur_mode->pixel_clk_khz,
 						adj_mode->pixel_clk_khz);
-
-			dyn_clk_caps = &(display->panel->dyn_clk_caps);
-			if (!dyn_clk_caps->dyn_clk_support) {
-				pr_err("dyn clk change not supported\n");
-				rc = -ENOTSUPP;
-				goto error;
-			}
-			if (adj_mode->dsi_mode_flags & DSI_MODE_FLAG_VRR) {
-				pr_err("dfps and dyn clk not supported in same commit\n");
-				rc = -ENOTSUPP;
-				goto error;
 			}
 		pr_debug("dynamic clk change detected\n");
 		adj_mode->dsi_mode_flags |= DSI_MODE_FLAG_DYN_CLK;
